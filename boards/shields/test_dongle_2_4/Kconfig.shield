@@ -1,0 +1,2 @@
+config SHIELD_TEST_DONGLE_2_4
+    def_bool $(shields_list_contains,test_dongle_2_4)

@@ -1,0 +1,12 @@
+#include <physical_layouts.dtsi>
+
+/ {
+    physical_layout_test_dongle_2_4: physical_layout_test_dongle_2_4 {
+        compatible = "zmk,physical-layout";
+        display-name = "test_dongle_2.4";
+        keys  //                     w   h    x    y     rot    rx    ry
+            = <&key_physical_attrs 100 100    0    0       0     0     0>
+            , <&key_physical_attrs 100 100  100    0       0   100     0>
+            ;
+    };
+};
