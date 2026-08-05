@@ -7,15 +7,55 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
+    
+    behaviors {
+        
+        // Macro to clear current BT profile (tap)
+        bt_clear_current_macro: bt_clear_current_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_CLR>;
+        };
+
+        // Macro to clear all BT profiles (hold)
+        bt_clear_all_macro: bt_clear_all_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_CLR_ALL>;
+        };
+
+        // Hold to clear all BT profiles, Tap to clear current
+        bt_clear_holdtap: bt_clear_holdtap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <3000>;
+            bindings = <&bt_clear_all_macro>, <&bt_clear_current_macro>;
+        };
+
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             display-name = "Base";
             bindings = <
-                &kp A &kp B
+                &kp A &bt_clear_holdtap 0 0
                 &kp C &kp D
             >;
         };
+
+                extra1 {
+            display-name = "Extra 1";
+            status = "reserved";
+        };
+
+        extra2 {
+            display-name = "Extra 2";
+            status = "reserved";
+        };
+
+
     };
 };
